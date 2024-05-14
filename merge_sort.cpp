@@ -1,32 +1,33 @@
-// nums1, nums2 là 2 mảng số nguyên ko giảm . m, n lần lượt là số lượng ptu của 2 mảng
-// tạo 1 mảng để gộp 2 mảng và sắp xếp theo thứ tự ko giảm
-// lưu mảng đó là nums1, nums1 có độ dài là m+n trong đó m là sl ptu của mảng 1, n ptu cuối toàn 0
+// cho 2 mảng nums1 và nums2 có kích thước m,n. 2 mảng này ko tăng dần. 
+// gộp 2 mảng lại sao cho các gtri ko giảm
+// trả về nums1 là mảng sau khi gộp.
+// ý tưởng:  dùng 1 vector vt để lưu các giá trị mảng được sắp xếp, sau đó đổ lại cho nums1.
 class Solution {
 public:
-    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n){
-        vector<int> resum;
-        int id1=0;
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        vector<int> vt; 
+        int id1=0; 
         int id2=0;
-        while(id1 < m && id2<n){
-            if(nums1[id1] < nums2[id2]){
-                resum.push_back(nums1[id1]);
-                id1+=1;
+        while(id1<m && id2<n){
+            if(nums1[id1]<nums2[id2]){
+                vt.push_back(nums1[id1]);
+                id1++;
             }
             else{
-                resum.push_back(nums2[id2]);
-                id2+=1;
+                vt.push_back(nums2[id2]);
+                id2++;
             }
         }
         while(id1<m){
-            resum.push_back(nums1[id1]);
-            id1+=1;
+            vt.push_back(nums1[id1]);
+            id1++;
         }
         while(id2<n){
-            resum.push_back(nums2[id2]);
-            id2+=1;
+            vt.push_back(nums2[id2]);
+            id2++;
         }
-        for(int i=0;i<resum.size();i++){
-            nums1[i] = resum[i];
+        for(int i=0; i<vt.size();i++){
+            nums1[i]=vt[i];
         }
     }
 };
